@@ -1,0 +1,12 @@
+﻿<metadata>
+  <add-node path="/api/package[@name='vn.momo.momo_partner.activity']">
+    <class abstract="false" deprecated="not deprecated" final="false" name="ActivityMoMoWebView.ClientHttpAsyncTaskBack" static="true" visibility="public" extends="java.lang.Object">
+    </class>
+  </add-node>
+  <add-node path="/api/package[@name='vn.momo.momo_partner']">
+    <class abstract="false" deprecated="not deprecated" final="false" name="ClientHttpAsyncTask" static="true" visibility="public" extends="java.lang.Object">
+    </class>
+  </add-node>
+  <attr path="/api/package[@name='vn.momo.momo_partner']/class[@name='ClientHttpAsyncTask']/method[@name='doInBackground' and count(parameter)=1 and parameter[1][@type='java.lang.Void...']]/parameter[1]" name="managedType">params Java.Lang.Object []</attr>
+  <attr path="/api/package[@name='vn.momo.momo_partner']/class[@name='ClientHttpAsyncTask']/method[@name='doInBackground' and count(parameter)=1 and parameter[1][@type='java.lang.Void...']]" name="managedReturn">Java.Lang.Object</attr>
+</metadata>
