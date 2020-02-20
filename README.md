@@ -1,7 +1,7 @@
 ### xamarin-momosdk
 
 
-##Android
+## Android
 
 ```C#
 private void requestPayment()
@@ -49,4 +49,24 @@ private void requestPayment()
             AppMoMoLib.Instance.RequestMoMoCallBack(this, eventValue);
         }
     }
+```
+
+## iOS
+
+```C#
+
+            NSNotificationCenter.DefaultCenter.RemoveObserver(this, aName: "NoficationCenterTokenReceived", null);
+            NSNotificationCenter.DefaultCenter.AddObserver(new NSString("NoficationCenterTokenReceived"), new Action<NSNotification>(OnNotify));
+            NativeLibrary.MoMoPayment.ShareInstant.InitializingAppBundleId(package_name_here, Momo_Merchant_Code_Here, Momo_Merchant_Name_Here, @"test", @"test");
+            NSMutableDictionary dict =  new NSMutableDictionary();
+            dict.Add(new NSString("amount"), new NSNumber(1000));
+            dict.Add(new NSString("fee"), new NSNumber(1000));
+            dict.Add(new NSString("extra"), new NSString("{\"key1\":\"value1\",\"key2\":\"value2\"}"));
+            dict.Add(new NSString("appScheme"), new NSString(Momo_Merchant_Code_Here));
+            dict.Add(new NSString("language"), new NSString("vi"));
+            dict.Add(new NSString("username"), new NSString("toanlcgift@gmail.com"));
+            dict.Add(new NSString("description"), new NSString("test momo"));
+            NativeLibrary.MoMoPayment.ShareInstant.InitPaymentInformation(dict, "momo", NativeLibrary.MOMO_ENVIRONTMENT.MOMO_SDK_DEVELOPMENT);
+            NativeLibrary.MoMoPayment.ShareInstant.RequestToken();
+            
 ```
