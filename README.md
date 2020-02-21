@@ -178,7 +178,7 @@ void OnNotify(NSNotification notification)
 }
 ```
 
-### Step 3: Handle OpenURL
+### Step 3: Handle OpenURL in AppDelegate.cs
 
 ```C#
 public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
