@@ -177,3 +177,23 @@ void OnNotify(NSNotification notification)
         }
 }
 ```
+
+### Step 3: Handle OpenURL
+
+```C#
+public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {   
+            if (url.AbsoluteString.StartsWith(MOMO_MERCHANT_CODE_HERE))
+            {
+                NativeLibrary.MoMoPayment.ShareInstant.HandleOpenUrl(url);
+                return true;
+            }
+            return base.OpenUrl(app, url, options);
+        }
+
+        public override bool HandleOpenURL(UIApplication application, NSUrl url)
+        {
+            NativeLibrary.MoMoPayment.ShareInstant.HandleOpenUrl(url);
+            return true;
+        }
+```
