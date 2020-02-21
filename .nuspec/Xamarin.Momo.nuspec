@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Required elements-->
+    <id>Xamarin.Momo</id>
+    <version>$version$</version>
+    <authors>toanlcgift@gmail.com</authors>
+	<owners>Nguyen Duc Toan</owners>
+	<tags>Momo MomoSDK MomoWallet Wallet</tags>
+	<license type="expression">MIT</license>
+	<iconUrl>https://github.com/toanlcgift/xamarin-momosdk/raw/master/docs/momo.png</iconUrl>
+    <projectUrl>https://github.com/toanlcgift/xamarin-momosdk</projectUrl>
+	<repository type="git" url="https://github.com/toanlcgift/xamarin-momosdk"/>
+	<requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<description>MomoSDK Xamarin Binding</description>
+
+    <dependencies>
+      <group targetFramework="MonoAndroid90">
+        <dependency id="Xamarin.Android.Support.v4" version="28.0.0.3"/>
+        <dependency id="Xamarin.Android.Support.Design" version="28.0.0.3"/>
+        <dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3"/>
+        <dependency id="Xamarin.Android.Support.v7.CardView" version="28.0.0.3"/>
+        <dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.3"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Android -->
+    <file src="..\Momo.Android\bin\Release\*.dll" target="lib\MonoAndroid90" />
+    <file src="..\Momo.Android\bin\Release\*.pdb" target="lib\MonoAndroid90" />
+	
+	<!-- iOS -->
+	<file src="..\Momo.iOS\bin\Release\*.dll" target="lib\Xamarin.iOS10" />
+    <file src="..\Momo.iOS\bin\Release\*.pdb" target="lib\Xamarin.iOS10" />
+  </files>
+</package>
