@@ -1,5 +1,10 @@
 ### xamarin-momosdk
 
+## Packages ##
+
+Platform/Feature               | Package name                              | Stable      |
+-----------------------|-------------------------------------------|-----------------------------|
+Momo Wallet             | `Xamarin.Momo` | [![NuGet](https://badge.fury.io/nu/Xamarin.Momo.svg)](https://www.nuget.org/packages/Xamarin.Momo/) |
 
 ## Android
 
