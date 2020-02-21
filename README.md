@@ -1,4 +1,4 @@
-### xamarin-momosdk
+# xamarin-momosdk
 
 ## Packages ##
 
@@ -8,6 +8,11 @@ Momo Wallet             | `Xamarin.Momo` | [![NuGet](https://badge.fury.io/nu/Xa
 
 ## Android
 
+### Step 1. Config AndroidMainfest
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+### Step 2. Get token & request payment
 ```C#
 private void requestPayment()
         {
@@ -55,6 +60,57 @@ private void requestPayment()
         }
     }
 ```
+### Step 3:Get token callback from MoMo app an submit to server side
+
+```C#
+protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            AppMoMoLib.Instance.TrackEventResult(this, data);//request tracking result data
+            if (requestCode == AppMoMoLib.Instance.RequestCodeMomo && (int)resultCode == -1)
+            {
+                if (data != null)
+                {
+                    if (data.GetIntExtra("status", -1) == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("message: " + "Get token " + data.GetStringExtra("message"));
+
+                        if (data.GetStringExtra("data") != null && !data.GetStringExtra("data").Equals(""))
+                        {
+                            // TODO:
+
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("message: " + "not_receive_info");
+                        }
+                    }
+                    else if (data.GetIntExtra("status", -1) == 1)
+                    {
+                        string message = data.GetStringExtra("message") != null ? data.GetStringExtra("message") : "Thất bại";
+                        System.Diagnostics.Debug.WriteLine("message: " + message);
+                    }
+                    else if (data.GetIntExtra("status", -1) == 2)
+                    {
+                        System.Diagnostics.Debug.WriteLine("message: " + "not_receive_info");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("message: " + "not_receive_info");
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("message: " + "not_receive_info");
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("message: " + "not_receive_info_err");
+            }
+        }
+```
 
 ## iOS
 
@@ -84,7 +140,9 @@ private void requestPayment()
  ```
 - CFBundleURLTypes: add scheme <partnerSchemeId> . Note: partnerSchemeId provided by MoMo , get from business.momo.vn
 - LSApplicationQueriesSchemes: add the scheme as "momo"
-
+        
+### STEP 2: Implement following methods:
+        
 ```C#
 
 void InitMomo
