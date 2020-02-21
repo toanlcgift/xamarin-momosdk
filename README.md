@@ -58,10 +58,45 @@ private void requestPayment()
 
 ## iOS
 
+### STEP 1: Config file Plist (CFBundleURLTypes and LSApplicationQueriesSchemes)
+
+ ```xml
+ <key>CFBundleURLTypes</key>
+ <array>
+   <dict>
+     <key>CFBundleURLName</key>
+     <string></string>
+     <key>CFBundleURLSchemes</key>
+     <array>
+       <string>partnerSchemeId</string>
+     </array>
+   </dict>
+ </array>
+ <key>LSApplicationQueriesSchemes</key>
+ <array>
+   <string>momo</string>
+ </array>
+ <key>NSAppTransportSecurity</key>
+ <dict>
+   <key>NSAllowsArbitraryLoads</key>
+   <true/>
+ </dict>
+ ```
+- CFBundleURLTypes: add scheme <partnerSchemeId> . Note: partnerSchemeId provided by MoMo , get from business.momo.vn
+- LSApplicationQueriesSchemes: add the scheme as "momo"
+
 ```C#
 
+void InitMomo
+{
             NSNotificationCenter.DefaultCenter.RemoveObserver(this, aName: "NoficationCenterTokenReceived", null);
             NSNotificationCenter.DefaultCenter.AddObserver(new NSString("NoficationCenterTokenReceived"), new Action<NSNotification>(OnNotify));
+}
+
+
+void RequestMomo
+{
+           
             NativeLibrary.MoMoPayment.ShareInstant.InitializingAppBundleId(package_name_here, Momo_Merchant_Code_Here, Momo_Merchant_Name_Here, @"test", @"test");
             NSMutableDictionary dict =  new NSMutableDictionary();
             dict.Add(new NSString("amount"), new NSNumber(1000));
@@ -73,5 +108,14 @@ private void requestPayment()
             dict.Add(new NSString("description"), new NSString("test momo"));
             NativeLibrary.MoMoPayment.ShareInstant.InitPaymentInformation(dict, "momo", NativeLibrary.MOMO_ENVIRONTMENT.MOMO_SDK_DEVELOPMENT);
             NativeLibrary.MoMoPayment.ShareInstant.RequestToken();
-            
+}
+
+void OnNotify(NSNotification notification)
+{
+       var response = notification.Object.ToString();
+       if (response.Contains("message=Successful"))
+       {
+        //TODO: implement your code here
+        }
+}
 ```
